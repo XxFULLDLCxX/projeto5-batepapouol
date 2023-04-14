@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles/reset.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/style.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="y-center login fixed hidden" onsubmit="getUserName(event)">
+            <h1><img src="assets/logo 2.svg" alt="Bate Papo UOL"></h1>
+            <input type="text" name="username" placeholder="Digite seu nome" required>
+            <input type="submit" value="Entrar">
+        </form>
+        <div class="sidebar hidden">
+            <div class="overdaley"></div>
+            <menu>
+                <h2>Escolha um contato <br> para enviar mensagem:</h2>
+                <ul>
+                    <li data-test="all">
+                        <ion-icon name="people"></ion-icon>
+                        Todos
+                    </li>
+                    <li data-test="participant">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        João
+                    </li>
+                    <li data-test="participant">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        Maria
+                    </li>
+                </ul>
+                <h2>Escolha a visibilidade:</h2>
+                <ul>
+                    <li data-test="public">
+                        <ion-icon name="lock-open"></ion-icon>
+                        Público
+                    </li>
+                    <li data-test="private">
+                        <ion-icon name="lock-closed"></ion-icon>
+                        Reservadamente
+                        <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
+                    </li>
+                </ul>
+            </menu>
+        </div>
+        <div class="content">
+            <header class="x-between">
+                <img src="assets/logo 2.svg" alt="Bate Papo UOL">
+                <button data-test="open-participants">
+                    <ion-icon name="people"></ion-icon>
+                </button>
+            </header>
+            <main>
+                <ul class="chat"></ul>
+            </main>
+            <footer>
+                <form class="y-center" onsubmit="sendMessage(event)">
+                    <input data-test="input-message" type="text" placeholder="Escreva aqui..." name="message">
+                    <button data-test="send-message" type="submit">
+                        <ion-icon name="paper-plane-outline"></ion-icon>
+                    </button>
+                </form>
+                <form class="y-center login hidden" onsubmit="getUserName(event)">
+                    <h1><img src="assets/logo 2.svg" alt="Bate Papo UOL"></h1>
+                    <input type="text" name="username" placeholder="Digite seu nome" required>
+                    <input type="submit" value="Entrar">
+                </form>
+            </footer>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
