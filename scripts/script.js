@@ -36,6 +36,17 @@ const sendUserActivity = () => {
   setTimeout(sendUserActivity, 5000);
 };
 
+const updateParticipants = () => {
+  axios.get("https://mock-api.driven.com.br/api/vm/uol/participants")
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error, username);
+    });
+};
+
+
 const chat = document.querySelector('.chat');
 
 const updateMessages = () => {

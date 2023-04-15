@@ -29,6 +29,7 @@ strong {
 ion-icon {
     width: inherit;
     height: inherit;
+    text-align: center;
 }
 
 /* Flex Utilities - Aqui estão as classes utilitárias para flexbox. */
@@ -52,6 +53,11 @@ ion-icon {
 .x-between {
     display: flex;
     justify-content: space-between;
+}
+
+.inflexible {
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .fixed {
@@ -116,6 +122,82 @@ ion-icon {
     width: 109px;
     border-radius: 9px;
     background-color: #E7E7E7;
+}
+
+.active-participants {
+    background-color: transparent;
+}
+
+.active-participants .overlay {
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background: #000000;
+}
+
+.active-participants aside {
+    width: 259px;
+    background-color: #FFFFFF;
+}
+
+.active-participants ul:first-of-type ion-icon {
+    height: 25px;
+    width: 25px;
+    margin-right: 7px;
+}
+
+.active-participants ul:last-of-type ion-icon {
+    height: 22px;
+    width: 22px;
+    margin-right: 7px;
+}
+
+.active-participants .check {
+    color: #28BB25;
+    height: 22px;
+    width: 22px;
+    background-color: inherit;
+    margin-left: auto;
+    margin-right: 14px;
+
+}
+
+.active-participants h2 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.active-participants h2:first-of-type {
+    height: 84px;
+    width: 259px;
+}
+
+.active-participants h2:last-of-type {
+    height: 66px;
+    width: 259px;
+}
+
+.active-participants ul {
+    flex-direction: column;
+}
+
+.active-participants li {
+    height: 36px;
+
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0em;
+    text-align: left;
+    line-height: 36px;
+    background-color: skyblue;
+
+    padding-left: 17px;
+    margin-bottom: 1px;
+
 }
 
 .content {

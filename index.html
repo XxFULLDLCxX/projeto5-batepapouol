@@ -19,42 +19,39 @@
 
 <body>
     <div class="container">
-        <form class="y-center login fixed hidden" onsubmit="getUserName(event)">
+        <form class="y-center login fixed" onsubmit="getUserName(event)">
             <h1><img src="assets/logo 2.svg" alt="Bate Papo UOL"></h1>
-            <input type="text" name="username" placeholder="Digite seu nome" required>
-            <input type="submit" value="Entrar">
+            <input data-test="input-name" type="text" name="username" placeholder="Digite seu nome" required>
+            <input data-test="send-name" type="submit" value="Entrar">
         </form>
-        <div class="sidebar hidden">
-            <div class="overdaley"></div>
-            <menu>
-                <h2>Escolha um contato <br> para enviar mensagem:</h2>
-                <ul>
-                    <li data-test="all">
-                        <ion-icon name="people"></ion-icon>
-                        Todos
-                    </li>
-                    <li data-test="participant">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        João
-                    </li>
-                    <li data-test="participant">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        Maria
-                    </li>
-                </ul>
-                <h2>Escolha a visibilidade:</h2>
-                <ul>
-                    <li data-test="public">
-                        <ion-icon name="lock-open"></ion-icon>
-                        Público
-                    </li>
-                    <li data-test="private">
-                        <ion-icon name="lock-closed"></ion-icon>
-                        Reservadamente
-                        <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
-                    </li>
-                </ul>
-            </menu>
+        <div class="x-center active-participants fixed hidden">
+            <div data-test="overlay" class="overlay"></div>
+            <aside class="inflexible">
+                <menu type="toolbar">
+                    <h2 class="center">Escolha um contato <br> para enviar mensagem:</h2>
+                    <ul class="x-center">
+                        <li data-test="all" class="y-center">
+                            <ion-icon name="people"></ion-icon>Todos
+                        </li>
+                        <li data-test="participant" class="y-center">
+                            <ion-icon name="person-circle-outline"></ion-icon>João
+                        </li>
+                        <li data-test="participant" class="y-center">
+                            <ion-icon name="person-circle-outline"></ion-icon>Maria
+                        </li>
+                    </ul>
+                    <h2 class="center">Escolha a visibilidade:</h2>
+                    <ul>
+                        <li data-test="public" class="y-center">
+                            <ion-icon name="lock-open"></ion-icon>Público
+                        </li>
+                        <li data-test="private" class="y-center">
+                            <ion-icon name="lock-closed"></ion-icon>Reservadamente
+                            <ion-icon data-test="check" class="check" name="checkmark-sharp"></ion-icon>
+                        </li>
+                    </ul>
+                </menu>
+            </aside>
         </div>
         <div class="content">
             <header class="x-between">
@@ -68,15 +65,11 @@
             </main>
             <footer>
                 <form class="y-center" onsubmit="sendMessage(event)">
-                    <input data-test="input-message" type="text" placeholder="Escreva aqui..." name="message">
+                    <input data-test="input-message" type="text" placeholder="Escreva aqui..." name="message" required>
+                    <div data-test="recipient"></div>
                     <button data-test="send-message" type="submit">
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </button>
-                </form>
-                <form class="y-center login hidden" onsubmit="getUserName(event)">
-                    <h1><img src="assets/logo 2.svg" alt="Bate Papo UOL"></h1>
-                    <input type="text" name="username" placeholder="Digite seu nome" required>
-                    <input type="submit" value="Entrar">
                 </form>
             </footer>
         </div>
