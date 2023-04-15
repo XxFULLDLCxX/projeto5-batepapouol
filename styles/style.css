@@ -75,6 +75,7 @@ ion-icon {
 /* Os estilos adicionais estão dispostos abaixo, em ordem de estruturação do HTML. */
 
 .container {
+    min-width: 375px;
     height: 100%;
 }
 
@@ -237,6 +238,8 @@ main .chat {
 main .chat li {
     min-width: 375px;
     min-height: 40px;
+    line-height: 40px;
+    padding: 0 8px;
 }
 
 main .chat li span:first-of-type {

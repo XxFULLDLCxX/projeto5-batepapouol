@@ -55,31 +55,33 @@ const updateParticipants = () => {
 const chat = document.querySelector('.chat');
 
 const updateMessages = () => {
-  axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
-    .then(response => {
-      chat.innerHTML = '';
+  if (!username) {
+    axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
+      .then(response => {
+        chat.innerHTML = '';
 
-      response.data.forEach(({ time, from, to, text, type }) => {
-        const message_types = {
-          'status': '',
-          'message': 'para' + `<strong> ${to}</strong>` + ':&nbsp;',
-          'private_message': 'reservadamente para' + `<strong> ${to}</strong>` + ':&nbsp;'
-        };
-        const message = document.createElement('li');
-        message.setAttribute('data-test', 'message');
-        message.classList.add('message');
-        message.classList.add(type);
-        message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
+        response.data.forEach(({ time, from, to, text, type }) => {
+          const message_types = {
+            'status': '',
+            'message': 'para' + `<strong> ${to}</strong>` + ':&nbsp;',
+            'private_message': 'reservadamente para' + `<strong> ${to}</strong>` + ':&nbsp;'
+          };
+          const message = document.createElement('li');
+          message.setAttribute('data-test', 'message');
+          message.classList.add('message');
+          message.classList.add(type);
+          message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
 
-        chat.appendChild(message);
-        message.scrollIntoView();
+          chat.appendChild(message);
+          message.scrollIntoView();
+        });
+        console.log(response);
+
+      })
+      .catch(error => {
+        console.log(error);
       });
-      console.log(response);
-
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  }
 };
 
 const sendMessage = (event) => {
@@ -96,9 +98,11 @@ const sendMessage = (event) => {
   })
     .then(response => {
       console.log(response);
+      updateMessages();
     })
     .catch(error => {
       console.log(error);
+      window.location.reload();
     });
 };
 
