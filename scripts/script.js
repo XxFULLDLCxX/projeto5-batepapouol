@@ -70,6 +70,9 @@ const updateMessages = () => {
           message.setAttribute('data-test', 'message');
           message.classList.add('message');
           message.classList.add(type);
+          if (from !== username || to !== username) {
+            message.classList.add('hidden');
+          }
           message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
 
           chat.appendChild(message);
