@@ -11,33 +11,34 @@ const addNewUser = username => {
     .then((response) => {
       console.log(response);
       login.classList.add('hidden');
-      sendUserActivity(username);
-      setInterval(updateMessages, 3000);
+      setInterval(sendUserActivity, 5000, username);
+      setInterval(updateMessages, 3000, username);
     })
     .catch((error) => {
       console.log(error);
-      window.location.reload();
+      // window.location.reload();
     });
 };
 
 const getUserName = event => {
   event.preventDefault();
-  if (!username) {
+  console.log(typeof (username));
+  if (typeof (username) === 'boolean') {
     username = event.target.username.value;
+    console.log(event.target.username.value);
     addNewUser(username);
   }
 };
 
-const sendUserActivity = () => {
+const sendUserActivity = username => {
   axios.post("https://mock-api.driven.com.br/api/vm/uol/status", { name: username })
     .then(response => {
       console.log(response);
     })
     .catch(error => {
       console.log(error, username);
-      window.location.reload();
+      // window.location.reload();
     });
-  setTimeout(sendUserActivity, 5000);
 };
 
 const updateParticipants = () => {
@@ -47,15 +48,16 @@ const updateParticipants = () => {
     })
     .catch(error => {
       console.log(error, username);
-      window.location.reload();
+      // window.location.reload();
     });
 };
 
 
 const chat = document.querySelector('.chat');
 
-const updateMessages = () => {
-  if (!username) {
+const updateMessages = username => {
+  console.log(typeof (username));
+  if (typeof (username) === 'string') {
     axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
       .then(response => {
         chat.innerHTML = '';
@@ -70,7 +72,7 @@ const updateMessages = () => {
           message.setAttribute('data-test', 'message');
           message.classList.add('message');
           message.classList.add(type);
-          if (from !== username || to !== username) {
+          if ((from === username || to === username) && type === 'private_message') {
             message.classList.add('hidden');
           }
           message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
@@ -83,6 +85,7 @@ const updateMessages = () => {
       })
       .catch(error => {
         console.log(error);
+        // window.location.reload();
       });
   }
 };
@@ -101,11 +104,11 @@ const sendMessage = (event) => {
   })
     .then(response => {
       console.log(response);
-      updateMessages();
+      updateMessages(username);
     })
     .catch(error => {
       console.log(error);
-      window.location.reload();
+      // window.location.reload();
     });
 };
 
