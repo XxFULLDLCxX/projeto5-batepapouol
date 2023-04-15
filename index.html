@@ -24,15 +24,16 @@
             <input data-test="input-name" type="text" name="username" placeholder="Digite seu nome" required>
             <input data-test="send-name" type="submit" value="Entrar">
         </form>
-        <div class="x-center active-participants fixed hidden">
-            <div data-test="overlay" class="overlay"></div>
+        <div class="x-center participants fixed hidden">
+            <div data-test="overlay" class="overlay" onclick="viewParticipants()"></div>
             <aside class="inflexible">
                 <menu type="toolbar">
                     <h2 class="center">Escolha um contato <br> para enviar mensagem:</h2>
-                    <ul class="x-center">
-                        <li data-test="all" class="y-center">
-                            <ion-icon name="people"></ion-icon>Todos
-                        </li>
+                    <div data-test="all" class="y-center Todos">
+                        <ion-icon name="people"></ion-icon>Todos
+                        <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
+                    </div>
+                    <ul class="x-center users">
                         <li data-test="participant" class="y-center">
                             <ion-icon name="person-circle-outline"></ion-icon>João
                         </li>
@@ -42,12 +43,14 @@
                     </ul>
                     <h2 class="center">Escolha a visibilidade:</h2>
                     <ul>
-                        <li data-test="public" class="y-center">
+                        <li data-test="public" x-state="message" class="y-center" onclick="messageVisibility(this)">
                             <ion-icon name="lock-open"></ion-icon>Público
+                            <ion-icon data-test="check" class="v check" name="checkmark-sharp"></ion-icon>
                         </li>
-                        <li data-test="private" class="y-center">
+                        <li data-test="private" x-state="private_message" class="y-center"
+                            onclick="messageVisibility(this)">
                             <ion-icon name="lock-closed"></ion-icon>Reservadamente
-                            <ion-icon data-test="check" class="check" name="checkmark-sharp"></ion-icon>
+                            <ion-icon data-test="check" class="v check hidden" name="checkmark-sharp"></ion-icon>
                         </li>
                     </ul>
                 </menu>
@@ -56,12 +59,12 @@
         <div class="content">
             <header class="x-between">
                 <img src="assets/logo 2.svg" alt="Bate Papo UOL">
-                <button data-test="open-participants">
+                <button data-test="open-participants" onclick="viewParticipants()">
                     <ion-icon name="people"></ion-icon>
                 </button>
             </header>
             <main>
-                <ul class="chat"></ul>
+                <ul class="chat hidden"></ul>
             </main>
             <footer>
                 <form class="y-center" onsubmit="sendMessage(event)">
@@ -75,9 +78,9 @@
         </div>
     </div>
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="/scripts/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+    <script src="/scripts/script.js"></script>
 </body>
 
 </html>

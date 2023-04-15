@@ -125,11 +125,12 @@ ion-icon {
     background-color: #E7E7E7;
 }
 
-.active-participants {
+.participants {
     background-color: transparent;
+    cursor: default;
 }
 
-.active-participants .overlay {
+.participants .overlay {
     opacity: 0.6;
     width: 100%;
     height: 100%;
@@ -137,34 +138,34 @@ ion-icon {
     background: #000000;
 }
 
-.active-participants aside {
+.participants aside {
     width: 259px;
     background-color: #FFFFFF;
 }
 
-.active-participants ul:first-of-type ion-icon {
+.participants ul:first-of-type ion-icon,
+.participants div:first-of-type ion-icon {
     height: 25px;
     width: 25px;
     margin-right: 7px;
 }
 
-.active-participants ul:last-of-type ion-icon {
+.participants ul:last-of-type ion-icon {
     height: 22px;
     width: 22px;
     margin-right: 7px;
 }
 
-.active-participants .check {
+.participants .check {
     color: #28BB25;
     height: 22px;
     width: 22px;
     background-color: inherit;
     margin-left: auto;
     margin-right: 14px;
-
 }
 
-.active-participants h2 {
+.participants h2 {
     font-size: 16px;
     font-weight: 700;
     line-height: 19px;
@@ -172,21 +173,22 @@ ion-icon {
     text-align: center;
 }
 
-.active-participants h2:first-of-type {
+.participants h2:first-of-type {
     height: 84px;
     width: 259px;
 }
 
-.active-participants h2:last-of-type {
+.participants h2:last-of-type {
     height: 66px;
     width: 259px;
 }
 
-.active-participants ul {
+.participants ul {
     flex-direction: column;
 }
 
-.active-participants li {
+.participants li,
+.participants div {
     height: 36px;
 
     font-size: 16px;
@@ -198,6 +200,8 @@ ion-icon {
 
     padding-left: 17px;
     margin-bottom: 1px;
+
+    cursor: pointer;
 
 }
 
