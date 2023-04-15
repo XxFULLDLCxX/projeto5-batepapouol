@@ -25,7 +25,7 @@
             <input data-test="send-name" type="submit" value="Entrar">
         </form>
         <div class="x-center participants fixed hidden">
-            <div data-test="overlay" class="overlay" onclick="viewParticipants()"></div>
+            <div data-test="overlay" class="overlay fixed" onclick="viewParticipants()"></div>
             <aside class="inflexible">
                 <menu type="toolbar">
                     <h2 class="center">Escolha um contato <br> para enviar mensagem:</h2>
@@ -34,12 +34,6 @@
                         <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
                     </div>
                     <ul class="x-center users">
-                        <li data-test="participant" class="y-center">
-                            <ion-icon name="person-circle-outline"></ion-icon>João
-                        </li>
-                        <li data-test="participant" class="y-center">
-                            <ion-icon name="person-circle-outline"></ion-icon>Maria
-                        </li>
                     </ul>
                     <h2 class="center">Escolha a visibilidade:</h2>
                     <ul>
@@ -64,7 +58,7 @@
                 </button>
             </header>
             <main>
-                <ul class="chat hidden"></ul>
+                <ul class="chat"></ul>
             </main>
             <footer>
                 <form class="y-center" onsubmit="sendMessage(event)">

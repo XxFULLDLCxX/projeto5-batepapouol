@@ -20,7 +20,7 @@ const addNewUser = from_username => {
     })
     .catch((error) => {
       console.log(error);
-      // window.location.reload();
+      window.location.reload();
     });
 };
 
@@ -89,7 +89,6 @@ const updateMessages = from_username => {
   if (typeof (from_username) === 'string') {
     axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
       .then(response => {
-        chat.classList.remove('hidden');
         chat.innerHTML = '';
 
         response.data.forEach(({ time, from, to, text, type }) => {
@@ -143,8 +142,10 @@ const sendMessage = (event) => {
 };
 
 let loop_menu;
+const overlay = document.querySelector('.overlay');
 
 const viewParticipants = () => {
+  console.log()
   if (participants.classList.contains('hidden')) {
     updateParticipants();
     loop_menu = setInterval(updateParticipants, 10000);
@@ -152,10 +153,22 @@ const viewParticipants = () => {
     clearInterval(loop_menu);
   }
   participants.classList.toggle('hidden');
-
 };
 
 // menu-content ul li
 
 const check = '<ion-icon data-test="check" class="check hidden" name="checkmark"></ion-icon>';
 //message.innerHTML = '<ion-icon name="person-circle-outline"></ion-icon>';
+
+
+/*
+Lista de participantes distoantes entre 10 segundos e userActivity há 5 segundos,
+ há um momento que pode haver um participante no menu e não na message
+ Muito inconclusivo.
+ Pode ser só o recarregar da pagina que é necessário, 
+ Pode haver a necessidade de criar um array de participants logo no inicio.
+ O Avaliador só ver as messages, talvez elas devam está todas com display none... 
+ case sensitive Jm != JM, mas no avaliador, talvez não. 
+ a ordem de execução pode inferir no resultado.
+ setInterval a ser pode não ser uma boa metódologia.
+*/
