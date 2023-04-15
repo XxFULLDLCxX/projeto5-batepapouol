@@ -234,6 +234,30 @@ main .chat {
     flex-wrap: wrap-reverse;
 }
 
+main .chat li {
+    min-width: 375px;
+    min-height: 40px;
+}
+
+main .chat li span:first-of-type {
+    color: #AAAAAA;
+}
+
+main .chat .message {
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+
+main .chat .private_message {
+    background: #FFDEDE;
+    border-radius: 2px;
+}
+
+main .chat .status {
+    background: #DCDCDC;
+    border-radius: 2px;
+}
+
 footer {
     position: absolute;
     width: 375px;

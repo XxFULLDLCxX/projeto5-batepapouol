@@ -3,7 +3,7 @@ axios.defaults.headers.common["Authorization"] = "26Cc7zGn49HEzmcHoloFlgHq";
 
 
 const login = document.querySelector('.login');
-let username = '';
+let username = false;
 
 
 const addNewUser = username => {
@@ -11,18 +11,21 @@ const addNewUser = username => {
     .then((response) => {
       console.log(response);
       login.classList.add('hidden');
-      updateMessages();
       sendUserActivity(username);
+      setInterval(updateMessages, 3000);
     })
     .catch((error) => {
       console.log(error);
+      window.location.reload();
     });
 };
 
 const getUserName = event => {
   event.preventDefault();
-  username = event.target.username.value;
-  addNewUser(username);
+  if (!username) {
+    username = event.target.username.value;
+    addNewUser(username);
+  }
 };
 
 const sendUserActivity = () => {
@@ -32,6 +35,7 @@ const sendUserActivity = () => {
     })
     .catch(error => {
       console.log(error, username);
+      window.location.reload();
     });
   setTimeout(sendUserActivity, 5000);
 };
@@ -43,6 +47,7 @@ const updateParticipants = () => {
     })
     .catch(error => {
       console.log(error, username);
+      window.location.reload();
     });
 };
 
@@ -62,7 +67,8 @@ const updateMessages = () => {
         };
         const message = document.createElement('li');
         message.setAttribute('data-test', 'message');
-        message.classList = ['message', type];
+        message.classList.add('message');
+        message.classList.add(type);
         message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
 
         chat.appendChild(message);
@@ -75,8 +81,6 @@ const updateMessages = () => {
       console.log(error);
     });
 };
-
-setInterval(updateMessages, 3000);
 
 const sendMessage = (event) => {
   event.preventDefault();
