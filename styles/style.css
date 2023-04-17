@@ -82,8 +82,6 @@ ion-icon {
 
 /* Os estilos adicionais estão dispostos abaixo, em ordem de estruturação do HTML. */
 
-.container {}
-
 .start {
     top: 0px;
     z-index: 10;

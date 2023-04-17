@@ -60,8 +60,9 @@ const updateParticipants = () => {
         participant.onclick = () => selectParticipant(participant);
         participant.innerHTML += `<ion-icon name="person-circle-outline"></ion-icon>${name}${check}`;
         users.appendChild(participant);
-      });
-    })
+      })
+        .catch(error => console.log(error));
+    });
 };
 
 const messageVisibility = element => {
