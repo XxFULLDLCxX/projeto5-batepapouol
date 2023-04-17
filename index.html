@@ -14,60 +14,81 @@
 
     <link rel="stylesheet" href="styles/style.css">
 
-    <title>Document</title>
+    <link rel="shortcut icon" href="assets/images.ico" type="image/x-icon">
+    <title>Bate-Papo UOL</title>
 </head>
 
 <body>
     <div class="container">
-        <form class="y-center login fixed" onsubmit="getUserName(event)">
+        <div class="start fixed">
             <h1><img src="assets/logo 2.svg" alt="Bate Papo UOL"></h1>
-            <input data-test="input-name" type="text" name="username" placeholder="Digite seu nome" required>
-            <input data-test="send-name" type="submit" value="Entrar">
-        </form>
-        <div class="x-center participants fixed hidden">
-            <div data-test="overlay" class="overlay fixed" onclick="viewParticipants()"></div>
-            <aside class="inflexible">
+            <form class="y-center login" onsubmit="getUserName(event)">
+                <input data-test="input-name" type="text" name="username" placeholder="Digite seu nome" required>
+                <input data-test="send-name" type="submit" value="Entrar">
+            </form>
+            <div class="loading">
+                <div class="jump center">
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                </div>
+                <h2>Entrando...</h2>
+            </div>
+        </div>
+        <div data-test="overlay" class="fixed overlay side-menu hidden" onclick="viewParticipants()">
+            <!-- <div class="overlay fixed"></div> -->
+            <aside onclick="event.stopPropagation()">
                 <menu type="toolbar">
                     <h2 class="center">Escolha um contato <br> para enviar mensagem:</h2>
-                    <div data-test="all" class="y-center Todos">
+                    <div data-test="all" class="y-center" onclick="selectParticipant(this)">
                         <ion-icon name="people"></ion-icon>Todos
                         <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
                     </div>
-                    <ul class="x-center users">
+                    <ul class="x-center users n">
                     </ul>
                     <h2 class="center">Escolha a visibilidade:</h2>
                     <ul>
                         <li data-test="public" x-state="message" class="y-center" onclick="messageVisibility(this)">
                             <ion-icon name="lock-open"></ion-icon>Público
-                            <ion-icon data-test="check" class="v check" name="checkmark-sharp"></ion-icon>
+                            <ion-icon data-test="check" class="view check" name="checkmark-sharp"></ion-icon>
                         </li>
                         <li data-test="private" x-state="private_message" class="y-center"
                             onclick="messageVisibility(this)">
                             <ion-icon name="lock-closed"></ion-icon>Reservadamente
-                            <ion-icon data-test="check" class="v check hidden" name="checkmark-sharp"></ion-icon>
+                            <ion-icon data-test="check" class="view check hidden" name="checkmark-sharp"></ion-icon>
                         </li>
                     </ul>
                 </menu>
             </aside>
         </div>
         <div class="content">
-            <header class="x-between">
-                <img src="assets/logo 2.svg" alt="Bate Papo UOL">
-                <button data-test="open-participants" onclick="viewParticipants()">
-                    <ion-icon name="people"></ion-icon>
-                </button>
+            <header>
+                <div class="fixed x-between">
+                    <img src="assets/logo 2.svg" alt="Bate Papo UOL">
+                    <button data-test="open-participants" onclick="viewParticipants()">
+                        <ion-icon name="people"></ion-icon>
+                    </button>
+                </div>
             </header>
             <main>
                 <ul class="chat"></ul>
             </main>
             <footer>
-                <form class="y-center" onsubmit="sendMessage(event)">
-                    <input data-test="input-message" type="text" placeholder="Escreva aqui..." name="message" required>
-                    <div data-test="recipient"></div>
-                    <button data-test="send-message" type="submit">
-                        <ion-icon name="paper-plane-outline"></ion-icon>
-                    </button>
+                <form class="fixed">
+                    <div class="y-center">
+                        <textarea data-test="input-message" type="text" placeholder="Escreva aqui..." name="message"
+                            required></textarea>
+
+                        <button data-test="send-message" type="submit" onclick="sendMessage()">
+                            <ion-icon name="paper-plane-outline"></ion-icon>
+                        </button>
+                    </div>
                 </form>
+                <div data-test="recipient" class=" recipient fixed">
+                    Enviando para Todos (publicamente)
+                </div>
             </footer>
         </div>
     </div>

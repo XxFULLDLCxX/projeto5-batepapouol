@@ -1,6 +1,5 @@
 body {
     font-family: 'Roboto', sans-serif;
-    height: 100vh;
 }
 
 * {
@@ -11,10 +10,11 @@ body {
 
 /* Normalize */
 
+textarea,
 button,
 input,
-a,
-li {
+li,
+a {
     border: none;
     outline: none;
     text-decoration: none;
@@ -24,6 +24,14 @@ li {
 
 strong {
     font-weight: 700;
+}
+
+h1,
+h2,
+.loading,
+.login {
+    width: max-content;
+    height: max-content;
 }
 
 ion-icon {
@@ -74,17 +82,37 @@ ion-icon {
 
 /* Os estilos adicionais estão dispostos abaixo, em ordem de estruturação do HTML. */
 
-.container {
-    min-width: 375px;
-    height: 100%;
+.container {}
+
+.start {
+    top: 0px;
+    z-index: 10;
+}
+
+.start h1 {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+
+    border-radius: 15px;
+
+    margin: 70px auto;
+    background-color: #6c5ce733;
 }
 
 .login {
     flex-direction: column;
-}
 
-.login h1 {
-    margin: 72px 0 92px;
+    position: absolute;
+    top: -18px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+
+    margin: auto;
+    z-index: 3;
+    padding: 50px 0;
+    background-color: #FFFFFF;
 }
 
 .login input[type='text'] {
@@ -125,40 +153,120 @@ ion-icon {
     background-color: #E7E7E7;
 }
 
-.participants {
-    background-color: transparent;
+.loading {
+    position: absolute;
+    top: -75px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    margin: auto;
+    z-index: 0;
+}
+
+.loading .jump .ball {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin: 0 9px;
+    background-color: #6c5ce7;
+    animation: wave 1s ease-in-out infinite;
+}
+
+.loading h2 {
+    position: absolute;
+    top: 125px;
+    left: 10px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0) scale(1.1) scaleY(0.7);
+        box-shadow: 0px 20px 5.5px rgba(0, 0, 0, 0.3);
+
+    }
+
+    25% {
+        transform: translateY(0) scale(1.1) scaleY(0.9);
+        box-shadow: 0px 20px 5.5px rgba(0, 0, 0, 0.3);
+
+    }
+
+    50% {
+        transform: translateY(-20px) scaleY(1.1);
+        box-shadow: 1px 35px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    75% {
+        transform: translateY(-25px) scaleY(1.1);
+        box-shadow: 1px 40px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    100% {
+        transform: translateY(0);
+        box-shadow: 0px 20px 5px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.loading .jump .ball:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.loading .jump .ball:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+.loading .jump .ball:nth-child(4) {
+    animation-delay: -0.6s;
+}
+
+.loading .jump .ball:nth-child(5) {
+    animation-delay: -0.8s;
+}
+
+.side-menu {
+    top: 0px;
     cursor: default;
-}
-
-.participants .overlay {
-    opacity: 0.6;
-    width: 100%;
-    height: 100%;
-    background: #000000;
-    z-index: 5;
-}
-
-.participants aside {
-    width: 259px;
-    background-color: #FFFFFF;
-    margin-left: auto;
+    background: #00000099;
     z-index: 8;
 }
 
-.participants ul:first-of-type ion-icon,
-.participants div:first-of-type ion-icon {
+.side-menu aside {
+    background-color: #FFFFFF;
+    width: 259px;
+    height: 100%;
+    margin-left: auto;
+    transition: transform 1s;
+    transform: translateX(100%);
+
+}
+
+.side-menu aside.slide-left {
+    transform: translateX(0);
+}
+
+.side-menu ul:first-of-type ion-icon,
+.side-menu div:first-of-type ion-icon {
     height: 25px;
     width: 25px;
     margin-right: 7px;
 }
 
-.participants ul:last-of-type ion-icon {
+.side-menu ul:last-of-type ion-icon {
     height: 22px;
     width: 22px;
     margin-right: 7px;
 }
 
-.participants .check {
+.side-menu .check {
     color: #28BB25;
     height: 22px;
     width: 22px;
@@ -167,7 +275,7 @@ ion-icon {
     margin-right: 14px;
 }
 
-.participants h2 {
+.side-menu h2 {
     font-size: 16px;
     font-weight: 700;
     line-height: 19px;
@@ -175,22 +283,22 @@ ion-icon {
     text-align: center;
 }
 
-.participants h2:first-of-type {
+.side-menu h2:first-of-type {
     height: 84px;
     width: 259px;
 }
 
-.participants h2:last-of-type {
+.side-menu h2:last-of-type {
     height: 66px;
     width: 259px;
 }
 
-.participants ul {
+.side-menu ul {
     flex-direction: column;
 }
 
-.participants li,
-.participants div {
+.side-menu li,
+.side-menu div {
     height: 36px;
 
     font-size: 16px;
@@ -208,107 +316,123 @@ ion-icon {
 }
 
 .content {
-    height: 100%;
+    background-color: #6c5ce7;
 }
 
-header {
-    height: 80px;
+.content header {
+    position: fixed;
+    top: 0px;
+    z-index: 5;
     width: 100%;
+    height: calc(80px + 26px);
+    background-color: #F3F3F3;
     /* width: 375px; */
-    background-color: #FFFFFF;
+}
+
+header .fixed {
+    height: 80px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 header img {
-    height: 53px;
     width: 75px;
+    height: 53px;
+    margin: 16px 0px 0px 22px;
 }
 
 header button {
-    height: 45px;
     width: 45px;
+    height: 45px;
+    margin: 18px 21px 0 auto;
 }
 
-main {
+.content main {
+    margin-top: 106px;
+    margin-bottom: 106px;
+}
+
+.content main .chat {
     background-color: #F3F3F3;
-    background-color: skyblue;
-    height: calc(100% - 160px);
 }
 
-main .chat {
-    overflow-y: scroll;
-    height: inherit;
-    flex-wrap: wrap-reverse;
-}
-
-main .chat li {
-    min-width: 375px;
+.content main .chat li {
+    /* min-width: 375px; */
+    word-wrap: break-word;
+    width: 100%;
     min-height: 40px;
-    line-height: 40px;
-    padding: 0 8px;
+    padding: 5px 0px;
+    line-height: 30px;
+    margin: 4px 0;
 }
 
-main .chat li span:first-of-type {
+li span,
+li strong {
+    flex-shrink: 0;
+}
+
+.content main .chat li span:first-of-type {
     color: #AAAAAA;
 }
 
-main .chat .message {
+.content main .chat .message {
     background: #FFFFFF;
     border-radius: 2px;
 }
 
-main .chat .private_message {
+.content main .chat .private_message {
     background: #FFDEDE;
     border-radius: 2px;
 }
 
-main .chat .status {
+.content main .chat .status {
     background: #DCDCDC;
     border-radius: 2px;
 }
 
-footer {
-    position: absolute;
-    width: 375px;
-    height: 80px;
-    left: 0px;
+.content footer {
+    position: fixed;
     bottom: 0px;
-
     height: 80px;
-    width: 100%;
-    /* width: 375px; */
 
-    background-color: #FFFFFF;
+    height: calc(80px + 26px);
+    width: 100%;
+    z-index: 5;
+
+    background-color: #F3F3F3;
+}
+
+.content footer form {
+    bottom: 0px;
+    width: 100%;
+    height: 80px;
+    padding-bottom: 20px;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 }
 
-footer input {
+footer textarea {
     height: 30px;
     width: 100%;
 
-    margin-left: 17px;
-    margin-right: 14px;
+    margin: 10px 14px 0px 17px;
 
-    border: none;
-    outline: none;
+    resize: none;
+    word-wrap: break-word;
 
-    background-color: skyblue;
     color: #000000;
     font-size: 18px;
     font-weight: 400;
     line-height: 21px;
     letter-spacing: 0em;
     text-align: left;
-
 }
 
-footer input::placeholder {
+footer textarea::placeholder {
     color: #000000;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-style: italic;
     font-weight: 400;
-    line-height: 21px;
+    line-height: 25px;
     letter-spacing: 0em;
     text-align: left;
 }
@@ -317,5 +441,20 @@ footer button {
     width: 26px;
     height: 26px;
 
+    margin-top: 10px;
     margin-right: 18px;
+}
+
+footer .recipient {
+    width: max-content;
+    height: 25px;
+    bottom: 0px;
+    margin: 25px 0px 5px 17px;
+
+    color: #505050;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
 }
