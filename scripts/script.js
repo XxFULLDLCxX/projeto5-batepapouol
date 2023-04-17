@@ -40,7 +40,6 @@ const sendUserActivity = from_username => {
 
 const createRecipientMessage = (to, status) => `Enviando para ${to} (${status})`;
 
-
 const selectParticipant = (element) => {
   document.querySelectorAll(`.check:not(.view)`).forEach(
     element => element.classList.add('hidden'));
@@ -89,8 +88,7 @@ const updateMessages = from_username => {
               'message': 'para' + `<strong> ${to}</strong>` + ':&nbsp;',
               'private_message': 'reservadamente para' + `<strong> ${to}</strong>` + ':&nbsp;'
             };
-            message.classList.add('message');
-            message.classList.add(type);
+            message.classList.add('message', type);
             message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
             message.scrollIntoView();
           }
