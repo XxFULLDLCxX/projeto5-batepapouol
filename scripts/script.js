@@ -25,6 +25,7 @@ const addNewUser = from_username => {
   axios.post("https://mock-api.driven.com.br/api/vm/uol/participants", { name: from_username })
     .then(() => {
       login.classList.add('hidden');
+      setInterval(updateParticipants, 10000);
       setInterval(sendUserActivity, 5000, from_username);
       setInterval(updateMessages, 3000, from_username);
     })
@@ -81,20 +82,21 @@ const updateMessages = from_username => {
         response.data.forEach(({ time, from, to, text, type }) => {
           reversed = from !== from_username && to !== from_username && to !== 'Todos';
           const message = document.createElement('li');
-          message.setAttribute('data-test', 'message');
 
           if (!(reversed && type === 'private_message')) {
+            chat.appendChild(message);
             const message_types = {
               'status': '',
               'message': 'para' + `<strong> ${to}</strong>` + ':&nbsp;',
               'private_message': 'reservadamente para' + `<strong> ${to}</strong>` + ':&nbsp;'
             };
-            chat.appendChild(message);
             message.classList.add('message');
             message.classList.add(type);
             message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
             message.scrollIntoView();
           }
+          message.setAttribute('data-test', 'message');
+
           if (!start.classList.contains('hidden')) {
             start.classList.add('hidden');
             textarea.focus();
@@ -107,6 +109,7 @@ const updateMessages = from_username => {
 
 const sendMessage = () => {
   if (textarea.value) {
+    setTimeout(() => updateMessages(from_username), 100);
     axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", {
       from: from_username,
       to: to_username,
@@ -125,9 +128,7 @@ const overlay = document.querySelector('.overlay');
 const viewParticipants = () => {
   if (overlay.classList.contains('hidden')) {
     updateParticipants();
-    loop_menu = setInterval(updateParticipants, 10000);
   } else {
-    clearInterval(loop_menu);
     textarea.focus();
   }
   overlay.classList.toggle('hidden');
