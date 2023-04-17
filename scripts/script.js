@@ -14,9 +14,7 @@ const login = document.querySelector('.login');
 
 const getUserName = event => {
   event.preventDefault();
-  console.log(typeof (from_username));
   if (typeof (from_username) === 'boolean') {
-    console.log(event.target.username.value);
     from_username = event.target.username.value;
     addNewUser(from_username);
   }
@@ -25,27 +23,18 @@ const getUserName = event => {
 const start = document.querySelector('.start');
 const addNewUser = from_username => {
   axios.post("https://mock-api.driven.com.br/api/vm/uol/participants", { name: from_username })
-    .then(response => {
-      console.log(response);
+    .then(() => {
       login.classList.add('hidden');
       setInterval(sendUserActivity, 5000, from_username);
       setInterval(updateMessages, 3000, from_username);
     })
-    .catch(error => {
-      console.log(error);
-      window.location.reload();
-    });
+    .catch(() => window.location.reload());
 };
 
 const sendUserActivity = from_username => {
   axios.post("https://mock-api.driven.com.br/api/vm/uol/status", { name: from_username })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error, from_username);
-      window.location.reload();
-    });
+    .then(() => updateMessages(from_username))
+    .catch(() => window.location.reload());
 };
 
 const createRecipientMessage = (to, status) => `Enviando para ${to} (${status})`;
@@ -56,7 +45,6 @@ const selectParticipant = (element) => {
     element => element.classList.add('hidden'));
   element.querySelector('.check').classList.remove('hidden');
   to_username = element.textContent.trim();
-  console.log(to_username);
   recipient.innerHTML = createRecipientMessage(to_username, view_status[message_status]);
 };
 
@@ -64,26 +52,16 @@ const updateParticipants = () => {
   users.innerHTML = '';
   axios.get("https://mock-api.driven.com.br/api/vm/uol/participants")
     .then(response => {
-      response.data.forEach(({ name }, index) => {
-        console.log(response, index);
+      response.data.forEach(({ name }) => {
         const participant = document.createElement('li');
         participant.setAttribute('data-test', 'participant');
         participant.classList.add('y-center');
         participant.onclick = () => selectParticipant(participant);
-        if (name !== 'Todos') {
-          participant.innerHTML += `<ion-icon name="person-circle-outline"></ion-icon>${name}${check}`;
-          users.appendChild(participant);
-        }
-        // users.innerHTML += `
-        // <li data-test="participant" class="y-center">
-        //   <ion-icon name="person-circle-outline"></ion-icon>${name}
-        // </li>`;
+        participant.innerHTML += `<ion-icon name="person-circle-outline"></ion-icon>${name}${check}`;
+        users.appendChild(participant);
       });
     })
-    .catch(error => {
-      console.log(error, from_username);
-      // window.location.reload();
-    });
+    .catch(() => window.location.reload());
 };
 
 const messageVisibility = element => {
@@ -95,50 +73,39 @@ const messageVisibility = element => {
 };
 
 const updateMessages = from_username => {
-  console.log(typeof (from_username));
   if (typeof (from_username) === 'string' || true) {
     axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
       .then(response => {
         chat.innerHTML = '';
 
         response.data.forEach(({ time, from, to, text, type }) => {
-          const message_types = {
-            'status': '',
-            'message': 'para' + `<strong> ${to}</strong>` + ':&nbsp;',
-            'private_message': 'reservadamente para' + `<strong> ${to}</strong>` + ':&nbsp;'
-          };
-          const message = document.createElement('li');
-          message.setAttribute('data-test', 'message');
-          message.classList.add('message');
-          message.classList.add(type);
-
-          message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
-
           reversed = from !== from_username && to !== from_username && to !== 'Todos';
 
-          if (reversed && type === 'private_message') {
-            message.classList.add('hidden');
-          }
-          chat.appendChild(message);
-          start.classList.add('hidden');
-          textarea.focus();
-          if (!reversed) {
+          if (!(reversed && type === 'private_message')) {
+            const message = document.createElement('li');
+            const message_types = {
+              'status': '',
+              'message': 'para' + `<strong> ${to}</strong>` + ':&nbsp;',
+              'private_message': 'reservadamente para' + `<strong> ${to}</strong>` + ':&nbsp;'
+            };
+            chat.appendChild(message);
+            message.setAttribute('data-test', 'message');
+            message.classList.add('message');
+            message.classList.add(type);
+            message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
             message.scrollIntoView();
+          }
+          if (!start.classList.contains('hidden')) {
+            start.classList.add('hidden');
+            textarea.focus();
           }
         });
       })
-      .catch(error => {
-        console.log(error);
-        window.location.reload();
-      });
+      .catch(() => window.location.reload());
   }
 };
 
 const sendMessage = () => {
-
-  console.log(from_username, textarea.value);
-  console.log(message_status);
-  //Saber o tipo da mensagem, direcionada ou não e privada ou pública
   if (textarea.value) {
     axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", {
       from: from_username,
@@ -146,14 +113,9 @@ const sendMessage = () => {
       text: textarea.value,
       type: message_status
     })
-      .then(response => {
-        console.log(response);
-        updateMessages(from_username);
-      })
-      .catch(error => {
-        console.log(error);
-        //window.location.reload();
-      });
+      .then(() => updateMessages(from_username)
+      )
+      .catch(() => window.location.reload());
   }
 };
 
@@ -161,12 +123,12 @@ let loop_menu;
 const overlay = document.querySelector('.overlay');
 
 const viewParticipants = () => {
-  console.log(side_menu);
   if (overlay.classList.contains('hidden')) {
     updateParticipants();
     loop_menu = setInterval(updateParticipants, 10000);
   } else {
     clearInterval(loop_menu);
+    textarea.focus();
   }
   overlay.classList.toggle('hidden');
   setTimeout(() => side_menu.classList.toggle('slide-left'), 200);
