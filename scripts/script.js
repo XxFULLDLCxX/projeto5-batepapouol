@@ -61,8 +61,7 @@ const updateParticipants = () => {
         participant.innerHTML += `<ion-icon name="person-circle-outline"></ion-icon>${name}${check}`;
         users.appendChild(participant);
       });
-    })
-    .catch(() => window.location.reload());
+    });
 };
 
 const messageVisibility = element => {
@@ -131,6 +130,7 @@ const viewParticipants = () => {
     updateParticipants();
   } else {
     textarea.focus();
+    updateParticipants();
   }
 };
 
