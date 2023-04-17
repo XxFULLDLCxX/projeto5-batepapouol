@@ -80,16 +80,16 @@ const updateMessages = from_username => {
 
         response.data.forEach(({ time, from, to, text, type }) => {
           reversed = from !== from_username && to !== from_username && to !== 'Todos';
+          const message = document.createElement('li');
+          message.setAttribute('data-test', 'message');
 
           if (!(reversed && type === 'private_message')) {
-            const message = document.createElement('li');
             const message_types = {
               'status': '',
               'message': 'para' + `<strong> ${to}</strong>` + ':&nbsp;',
               'private_message': 'reservadamente para' + `<strong> ${to}</strong>` + ':&nbsp;'
             };
             chat.appendChild(message);
-            message.setAttribute('data-test', 'message');
             message.classList.add('message');
             message.classList.add(type);
             message.innerHTML = `<span>(${time}) </span><strong> ${from} </strong>${message_types[type]}&nbsp;${text}`;
