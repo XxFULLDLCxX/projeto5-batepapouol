@@ -62,7 +62,6 @@ const updateParticipants = () => {
         users.appendChild(participant);
       });
     })
-    .catch(error => console.log(error));
 };
 
 const messageVisibility = element => {
@@ -131,7 +130,6 @@ const viewParticipants = () => {
     updateParticipants();
   } else {
     textarea.focus();
-    updateParticipants();
   }
 };
 
