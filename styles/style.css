@@ -169,6 +169,8 @@ ion-icon {
     height: 18px;
     border-radius: 50%;
     margin: 0 9px;
+    background-image: url('../assets/uol.png');
+    background-size: cover;
     background-color: #6c5ce7;
     animation: wave 1s ease-in-out infinite;
 }

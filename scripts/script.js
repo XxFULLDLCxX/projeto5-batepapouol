@@ -62,7 +62,7 @@ const updateParticipants = () => {
         users.appendChild(participant);
       });
     })
-    .catch((error) => console.log(error)); // window.location.reload());
+    .catch(() => window.location.reload());
 };
 
 const messageVisibility = element => {
