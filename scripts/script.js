@@ -62,10 +62,11 @@ const updateParticipants = () => {
         users.appendChild(participant);
       });
     })
-    .catch(() => window.location.reload());
+    .catch((error) => console.log(error)); // window.location.reload());
 };
 
 const messageVisibility = element => {
+  updateMessages(from_username);
   document.querySelectorAll('.view.check').forEach(
     element => element.classList.add('hidden'));
   element.querySelector('.view.check').classList.remove('hidden');
@@ -80,10 +81,8 @@ const updateMessages = from_username => {
         chat.innerHTML = '';
 
         response.data.forEach(({ time, from, to, text, type }) => {
-          reversed = from !== from_username && to !== from_username && to !== 'Todos';
           const message = document.createElement('li');
-
-          if (!(reversed && type === 'private_message')) {
+          if (!(from !== from_username && to !== from_username && to !== 'Todos' && type === 'private_message')) {
             chat.appendChild(message);
             const message_types = {
               'status': '',
@@ -109,7 +108,6 @@ const updateMessages = from_username => {
 
 const sendMessage = () => {
   if (textarea.value) {
-    setTimeout(() => updateMessages(from_username), 100);
     axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", {
       from: from_username,
       to: to_username,
@@ -126,19 +124,17 @@ let loop_menu;
 const overlay = document.querySelector('.overlay');
 
 const viewParticipants = () => {
-  if (overlay.classList.contains('hidden')) {
+  overlay.classList.toggle('hidden');
+  chat.classList.toggle('fixed');
+  setTimeout(() => side_menu.classList.toggle('slide-left'), 100);
+  if (!overlay.classList.contains('hidden')) {
     updateParticipants();
   } else {
     textarea.focus();
   }
-  overlay.classList.toggle('hidden');
-  setTimeout(() => side_menu.classList.toggle('slide-left'), 200);
 };
 
-// menu-content ul li
-
 const check = '<ion-icon data-test="check" class="check hidden" name="checkmark"></ion-icon>';
-//message.innerHTML = '<ion-icon name="person-circle-outline"></ion-icon>';
 
 const textarea = document.querySelector('textarea');
 textarea.addEventListener("keydown", event => {

@@ -242,12 +242,11 @@ ion-icon {
 
 .side-menu aside {
     background-color: #FFFFFF;
-    width: 259px;
+    width: 274px;
     height: 100%;
     margin-left: auto;
     transition: transform 1s;
     transform: translateX(100%);
-
 }
 
 .side-menu aside.slide-left {
@@ -284,18 +283,41 @@ ion-icon {
     text-align: center;
 }
 
-.side-menu h2:first-of-type {
+.side-menu menu>h2 {
+    position: sticky;
+    top: 0px;
     height: 84px;
     width: 259px;
+    background-color: #FFFFFF;
+    z-index: 5;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.side-menu h2:last-of-type {
+.side-menu .visibility h2 {
     height: 66px;
     width: 259px;
+    margin-left: -10px;
 }
 
 .side-menu ul {
     flex-direction: column;
+}
+
+.side-menu aside {
+    overflow: hidden auto;
+}
+
+.side-menu aside menu>ul {
+    height: 100%;
+}
+
+.side-menu aside menu .visibility {
+    position: sticky;
+    bottom: 0px;
+    height: max-content;
+    width: 259px;
+    background-color: #FFFFFF;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .side-menu li,
@@ -307,7 +329,6 @@ ion-icon {
     letter-spacing: 0em;
     text-align: left;
     line-height: 36px;
-    background-color: skyblue;
 
     padding-left: 17px;
     margin-bottom: 1px;
@@ -316,18 +337,13 @@ ion-icon {
 
 }
 
-.content {
-    background-color: #6c5ce7;
-}
-
 .content header {
     position: fixed;
     top: 0px;
     z-index: 5;
     width: 100%;
-    height: calc(80px + 26px);
+    height: calc(80px + 0px);
     background-color: #F3F3F3;
-    /* width: 375px; */
 }
 
 header .fixed {
@@ -349,7 +365,8 @@ header button {
 
 .content main {
     margin-top: 106px;
-    margin-bottom: 106px;
+    margin-bottom: 84px;
+    background-color: #F3F3F3;
 }
 
 .content main .chat {
@@ -357,11 +374,10 @@ header button {
 }
 
 .content main .chat li {
-    /* min-width: 375px; */
-    word-wrap: break-word;
+    word-break: break-all;
     width: 100%;
     min-height: 40px;
-    padding: 5px 0px;
+    padding: 5px 8px;
     line-height: 30px;
     margin: 4px 0;
 }
@@ -395,7 +411,7 @@ li strong {
     bottom: 0px;
     height: 80px;
 
-    height: calc(80px + 26px);
+    height: calc(80px + 0px);
     width: 100%;
     z-index: 5;
 

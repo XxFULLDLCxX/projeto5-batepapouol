@@ -46,20 +46,22 @@
                         <ion-icon name="people"></ion-icon>Todos
                         <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
                     </div>
-                    <ul class="x-center users n">
+                    <ul class="x-center users">
                     </ul>
-                    <h2 class="center">Escolha a visibilidade:</h2>
-                    <ul>
-                        <li data-test="public" x-state="message" class="y-center" onclick="messageVisibility(this)">
-                            <ion-icon name="lock-open"></ion-icon>Público
-                            <ion-icon data-test="check" class="view check" name="checkmark-sharp"></ion-icon>
-                        </li>
-                        <li data-test="private" x-state="private_message" class="y-center"
-                            onclick="messageVisibility(this)">
-                            <ion-icon name="lock-closed"></ion-icon>Reservadamente
-                            <ion-icon data-test="check" class="view check hidden" name="checkmark-sharp"></ion-icon>
-                        </li>
-                    </ul>
+                    <div class="visibility">
+                        <h2 class="center">Escolha a visibilidade:</h2>
+                        <ul>
+                            <li data-test="public" x-state="message" class="y-center" onclick="messageVisibility(this)">
+                                <ion-icon name="lock-open"></ion-icon>Público
+                                <ion-icon data-test="check" class="view check" name="checkmark-sharp"></ion-icon>
+                            </li>
+                            <li data-test="private" x-state="private_message" class="y-center"
+                                onclick="messageVisibility(this)">
+                                <ion-icon name="lock-closed"></ion-icon>Reservadamente
+                                <ion-icon data-test="check" class="view check hidden" name="checkmark-sharp"></ion-icon>
+                            </li>
+                        </ul>
+                    </div>
                 </menu>
             </aside>
         </div>
