@@ -1,5 +1,5 @@
 // Configuração de Token
-axios.defaults.headers.common["Authorization"] = "26Cc7zGn49HEzmcHoloFlgHq";
+axios.defaults.headers.common["Authorization"] = "K3Fnoo9Nfphj7u7O0uFAhEj0";
 
 const chat = document.querySelector('.chat');
 const recipient = document.querySelector('.recipient');
